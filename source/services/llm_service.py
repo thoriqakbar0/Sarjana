@@ -17,6 +17,10 @@ from source.models.model_store import ModelStore
 from source.models.pdf_data_model import Pdf
 from source.services.service import Service, ServiceName
 
+# Thor: can delete if this is unsafe. 
+from dotenv import load_dotenv
+load_dotenv()
+
 
 class LlmService(Service):
     """Service to handle llm"""
@@ -25,7 +29,7 @@ class LlmService(Service):
         super().__init__()
 
         self._api_key = os.environ["OPENAI_API_KEY"]
-        self._llm = ChatOpenAI(name="gpt-3.5-turbo", api_key=self._api_key)
+        self._llm = ChatOpenAI(name="gpt-4o-mini", api_key=self._api_key)
 
         self._prompt = ChatPromptTemplate.from_template("Write a short story about {topic} in {style} style.")
 
