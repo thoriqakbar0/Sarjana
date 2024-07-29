@@ -22,7 +22,7 @@ class FileHandlingService(Service):
         path = ModelStore().paths().pdf_dir() / pdf_filename
         with open(path, "w") as w:
             json_data = pdf_obj.__dict__
-            json_data['path'] = str(json_data['path'])  # Convert Path to str for JSON serialization
+            json_data['path'] = str(json_data['path']) 
             w.write(json.dumps(json_data, default=str))
 
     def load_json_into_pdf_obj(self, json_path: Path):

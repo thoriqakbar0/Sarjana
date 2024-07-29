@@ -5,6 +5,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from llama_index.readers.file import PyMuPDFReader
 from pypdf import PdfReader
 from PySide6.QtCore import Slot
+from typing import List
 
 from source.models.model_store import ModelStore
 from source.models.pdf_data_model import Pdf
@@ -13,6 +14,7 @@ from source.services.service import Service, ServiceName
 # Thor: add embedidng model
 from transformers import AutoTokenizer, AutoModel
 import torch
+
 
 
 class PdfService(Service):
@@ -65,3 +67,16 @@ class PdfService(Service):
             outputs = model(**inputs)
         embeddings = outputs.last_hidden_state.mean(dim=1).squeeze().tolist()
         return embeddings
+
+
+    def create_pdf_obj(self, path: Path, documents: List[Document], metadata: dict):
+        pdf_obj = Pdf(filename=path.name, path=path, documents=documents, metadata=metadata, summaries=None)
+        # Generate embeddings for the first page text
+        first_page_text = self.get_first_page_pdf_text(path)
+        pdf_obj.first_page_embedding = self.generate_embeddings(first_page_text)
+
+        # Add embeddings to each document
+        for doc in pdf_obj.documents:
+            doc.embeddings = self.generate_embeddings(doc.page_content)
+
+        return pdf_obj

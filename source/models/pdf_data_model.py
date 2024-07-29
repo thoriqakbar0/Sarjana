@@ -10,13 +10,19 @@ from source.models.model import Model, ModelName
 from typing import Optional, List
 import json
 
+from langchain.docstore.document import Document as BaseDocument
+from typing import Optional, List
+
+class DocumentWithEmbedding(BaseDocument):
+    embeddings: Optional[List[float]] = None
+
 class Pdf(BaseModel):
     filename: str
     path: Path
-    documents: list[Document]
+    documents: list[DocumentWithEmbedding]
     metadata: dict
     summaries: dict | None
-    embeddings: Optional[List[float]] = None
+    first_page_embedding: Optional[List[float]] = None
 
 
 class PdfModels(Model):
