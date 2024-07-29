@@ -16,17 +16,19 @@ class FileHandlingService(Service):
     @staticmethod
     def name() -> str:
         return ServiceName.FILE_HANDLING_SERVICE.name
-
+    
     def save_pdf_obj_as_json(self, pdf_filename: str, pdf_obj: Pdf):
         pdf_filename = pdf_filename.split(".")[0] + ".json"
         path = ModelStore().paths().pdf_dir() / pdf_filename
         with open(path, "w") as w:
-            w.write(pdf_obj.json())
+            json_data = pdf_obj.__dict__
+            json_data['path'] = str(json_data['path'])  # Convert Path to str for JSON serialization
+            w.write(json.dumps(json_data, default=str))
 
     def load_json_into_pdf_obj(self, json_path: Path):
         with open(json_path) as j:
             dict_item = json.load(j)
-
+        dict_item['path'] = Path(dict_item['path'])  # Convert str back to Path
         return Pdf(**dict_item)
 
     def read_all_local_pdf_json(self) -> list[Pdf]:

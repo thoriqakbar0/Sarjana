@@ -7,6 +7,8 @@ from PySide6.QtCore import QObject, Signal
 
 from source.models.model import Model, ModelName
 
+from typing import Optional, List
+import json
 
 class Pdf(BaseModel):
     filename: str
@@ -14,6 +16,7 @@ class Pdf(BaseModel):
     documents: list[Document]
     metadata: dict
     summaries: dict | None
+    embeddings: Optional[List[float]] = None
 
 
 class PdfModels(Model):
@@ -53,3 +56,6 @@ class PdfModels(Model):
 
     def count(self) -> int:
         return len(self._pdf_data)
+    
+    def json(self):
+        return json.dumps(self.__dict__, default=str)

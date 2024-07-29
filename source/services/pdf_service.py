@@ -10,6 +10,10 @@ from source.models.model_store import ModelStore
 from source.models.pdf_data_model import Pdf
 from source.services.service import Service, ServiceName
 
+# Thor: add embedidng model
+from transformers import AutoTokenizer, AutoModel
+import torch
+
 
 class PdfService(Service):
     """Service to handle PDF data"""
@@ -42,7 +46,22 @@ class PdfService(Service):
         ModelStore().pdf().add_summaries(key, value)
 
     def create_pdf_obj(self, path: Path, documents: list[Document], metadata: dict):
+        pdf_obj = Pdf(filename=path.name, path=path, documents=documents, metadata=metadata, summaries=None)
         print(path)
         print(documents)
         print(metadata)
-        return Pdf(filename=path.name, path=path, documents=documents, metadata=metadata, summaries=None)
+        first_page_text = self.get_first_page_pdf_text(path)
+        pdf_obj.embeddings = self.generate_embeddings(first_page_text)
+        return pdf_obj
+    
+    def generate_embeddings(self, text: str) -> list:
+        """Generate embeddings using GTE-Small model."""
+        model_name = "thenlper/gte-small"
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModel.from_pretrained(model_name)
+
+        inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
+        with torch.no_grad():
+            outputs = model(**inputs)
+        embeddings = outputs.last_hidden_state.mean(dim=1).squeeze().tolist()
+        return embeddings

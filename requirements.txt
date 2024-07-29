@@ -23,3 +23,5 @@ pdfrw==0.4
 pyside6==6.6.1 
 pymupdf==1.24.7
 tiktoken
+torch
+transformers
