@@ -46,15 +46,6 @@ class PdfService(Service):
 
     def update_summaries(self, key: str, value: dict):
         ModelStore().pdf().add_summaries(key, value)
-
-    def create_pdf_obj(self, path: Path, documents: list[Document], metadata: dict):
-        pdf_obj = Pdf(filename=path.name, path=path, documents=documents, metadata=metadata, summaries=None)
-        print(path)
-        print(documents)
-        print(metadata)
-        first_page_text = self.get_first_page_pdf_text(path)
-        pdf_obj.embeddings = self.generate_embeddings(first_page_text)
-        return pdf_obj
     
     def generate_embeddings(self, text: str) -> list:
         """Generate embeddings using GTE-Small model."""
