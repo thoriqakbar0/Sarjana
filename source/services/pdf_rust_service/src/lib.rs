@@ -35,9 +35,11 @@ impl RustPdfService {
     fn extract_text_from_page(&self, path: &str, page_number: u32) -> PyResult<String> {
         let text = extract_text(path).map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(e.to_string()))?;
         let pages: Vec<&str> = text.split("\u{0C}").collect();
-        if page_number > pages.len() as u32 {
+        
+        if page_number == 0 || page_number > pages.len() as u32 {
             return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>("Page number out of range"));
         }
+        
         Ok(pages[page_number as usize - 1].to_string())
     }
 }

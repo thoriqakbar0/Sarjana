@@ -1,17 +1,4 @@
 from pathlib import Path
-<<<<<<< Updated upstream
-
-from langchain.docstore.document import Document
-from langchain_community.document_loaders import PyPDFLoader
-from llama_index.readers.file import PyMuPDFReader
-from pypdf import PdfReader
-from PySide6.QtCore import Slot
-
-from source.models.model_store import ModelStore
-from source.models.pdf_data_model import Pdf
-from source.services.service import Service, ServiceName
-
-=======
 from typing import List
 from langchain.docstore.document import Document
 from source.models.model_store import ModelStore
@@ -19,8 +6,12 @@ from source.models.pdf_data_model import Pdf
 from source.services.service import Service, ServiceName
 from transformers import AutoTokenizer, AutoModel
 import torch
+import sys
+import os
+
+# Add the path to the Rust library to the Python path
+sys.path.append(os.path.abspath('pdf_rust_service/target/debug'))
 import rust_pdf_service
->>>>>>> Stashed changes
 
 class PdfService(Service):
     def __init__(self) -> None:
@@ -44,13 +35,6 @@ class PdfService(Service):
     def update_summaries(self, key: str, value: dict):
         ModelStore().pdf().add_summaries(key, value)
 
-<<<<<<< Updated upstream
-    def create_pdf_obj(self, path: Path, documents: list[Document], metadata: dict):
-        print(path)
-        print(documents)
-        print(metadata)
-        return Pdf(filename=path.name, path=path, documents=documents, metadata=metadata, summaries=None)
-=======
     def generate_embeddings(self, text: str) -> list:
         """Generate embeddings using GTE-Small model."""
         model_name = "thenlper/gte-small"
@@ -72,4 +56,3 @@ class PdfService(Service):
             doc.embeddings = self.generate_embeddings(doc.page_content)
 
         return pdf_obj
->>>>>>> Stashed changes
