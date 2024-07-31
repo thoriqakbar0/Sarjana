@@ -1,0 +1,9 @@
+/Users/thoriq/devlab/Sarjana/source/services/pdf_rust_service/target/debug/deps/libencoding_index_simpchinese-adb70d642d7532f3.rmeta: /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/lib.rs /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030.rs /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030_ranges.rs
+
+/Users/thoriq/devlab/Sarjana/source/services/pdf_rust_service/target/debug/deps/libencoding_index_simpchinese-adb70d642d7532f3.rlib: /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/lib.rs /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030.rs /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030_ranges.rs
+
+/Users/thoriq/devlab/Sarjana/source/services/pdf_rust_service/target/debug/deps/encoding_index_simpchinese-adb70d642d7532f3.d: /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/lib.rs /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030.rs /Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030_ranges.rs
+
+/Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/lib.rs:
+/Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030.rs:
+/Users/thoriq/.cargo/registry/src/index.crates.io-6f17d22bba15001f/encoding-index-simpchinese-1.20141219.5/gb18030_ranges.rs:

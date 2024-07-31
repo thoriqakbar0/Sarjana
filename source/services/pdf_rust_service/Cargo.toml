@@ -1,0 +1,14 @@
+[package]
+name = "rust_pdf_service"
+version = "0.1.0"
+authors = ["thoriq <thoriqakbar00@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "rust_pdf_service"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.18", features = ["extension-module"] }
+lopdf = "0.31.0"
+pdf-extract = "0.7.3"
